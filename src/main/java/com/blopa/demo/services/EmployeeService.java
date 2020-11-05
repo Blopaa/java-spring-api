@@ -2,19 +2,19 @@ package com.blopa.demo.services;
 
 import com.blopa.demo.entity.Employee;
 import com.blopa.demo.repository.EmployeeRepository;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
+@Service
 public class EmployeeService {
-
+    @Autowired
     private EmployeeRepository employeeRepository;
 
     public Object getEmployeeByEmail(String email) {
         return employeeRepository.findByEmail(email);
     }
 
-    public Employee AddEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public void AddEmployee(Employee employee) {
+        employeeRepository.save(employee);
     }
 }
