@@ -36,4 +36,13 @@ public class EmployeeCotroller {
         }
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
+
+    @DeleteMapping("/deleteemployee/{employeeId}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Integer employeeId){
+        String employee = employeeService.deleteEmployeById(employeeId);
+        if(employee == null){
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 }

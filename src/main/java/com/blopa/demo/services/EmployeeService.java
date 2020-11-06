@@ -33,4 +33,11 @@ public class EmployeeService {
         existsEmploye.setSalary(employee.getSalary());
         return (Employee) employeeRepository.save(existsEmploye);
     }
+
+    public String deleteEmployeById(Integer ID){
+        Employee existsEmploye = (Employee) employeeRepository.findById(ID).orElse(null);
+        if(existsEmploye == null) return (String) null;
+        employeeRepository.deleteById(ID);
+        return "Employe removed :(";
+    }
 }
