@@ -17,9 +17,9 @@ public class EmployeeCotroller {
     private EmployeeService employeeService;
 
     @PostMapping("/addemployee")
-    public ResponseEntity<?> addEmployee(@RequestBody Employee employee) {
-        employeeService.AddEmployee(employee);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    public ResponseEntity<?> addEmployee(@RequestBody Employee newEmployee) {
+        Employee employee = employeeService.AddEmployee(newEmployee);
+        return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
 
     @GetMapping("/getemployees")
@@ -43,7 +43,7 @@ public class EmployeeCotroller {
         if(employee == null){
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteemployee/{employeeId}")
@@ -52,6 +52,6 @@ public class EmployeeCotroller {
         if(employee == null){
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 }
