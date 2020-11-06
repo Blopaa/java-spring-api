@@ -7,18 +7,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Object getEmployeeByEmail(String email) {
+    public Employee getEmployeeByEmail(String email) {
         return employeeRepository.findByEmail(email);
     }
 
     public List<Employee> getEMployees(){
-        return (List<Employee>) employeeRepository.findAll();
+        return employeeRepository.findAll();
     }
 
     public void AddEmployee(Employee employee) {
@@ -26,17 +27,17 @@ public class EmployeeService {
     }
 
     public Employee updateEmployeById(Employee employee, Integer ID){
-        Employee existsEmploye = (Employee) employeeRepository.findById(ID).orElse(null);
-        if(existsEmploye == null) return (Employee) null;
+        Employee existsEmploye = employeeRepository.findById(ID).orElse(null);
+        if(existsEmploye == null) return null;
         existsEmploye.setName(employee.getName());
         existsEmploye.setEmail(employee.getEmail());
         existsEmploye.setSalary(employee.getSalary());
-        return (Employee) employeeRepository.save(existsEmploye);
+        return employeeRepository.save(existsEmploye);
     }
 
     public String deleteEmployeById(Integer ID){
-        Employee existsEmploye = (Employee) employeeRepository.findById(ID).orElse(null);
-        if(existsEmploye == null) return (String) null;
+        Employee existsEmploye = employeeRepository.findById(ID).orElse(null);
+        if(existsEmploye == null) return null;
         employeeRepository.deleteById(ID);
         return "Employe removed :(";
     }

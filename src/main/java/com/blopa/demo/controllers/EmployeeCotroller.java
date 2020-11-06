@@ -28,6 +28,15 @@ public class EmployeeCotroller {
         return new ResponseEntity<>(allEmployees, HttpStatus.OK);
     }
 
+    @GetMapping("/getemployee/{email}")
+    public ResponseEntity<?> getEMployeesByEmail(@PathVariable String email){
+        Employee employee = employeeService.getEmployeeByEmail(email);
+        if(employee != null){
+            return new ResponseEntity<>(employee, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @PutMapping("/updateemployee/{employeeId}")
     public ResponseEntity<?> updateEmployee(@PathVariable Integer employeeId, @RequestBody Employee newEmployee){
         Employee employee = employeeService.updateEmployeById(newEmployee, employeeId);
