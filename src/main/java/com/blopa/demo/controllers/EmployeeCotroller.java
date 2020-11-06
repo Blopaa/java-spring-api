@@ -27,4 +27,13 @@ public class EmployeeCotroller {
         Collection<Employee> allEmployees = employeeService.getEMployees();
         return new ResponseEntity<>(allEmployees, HttpStatus.OK);
     }
+
+    @PutMapping("/updateemployee/{employeeId}")
+    public ResponseEntity<?> updateEmployee(@PathVariable Integer employeeId, @RequestBody Employee newEmployee){
+        Employee employee = employeeService.updateEmployeById(newEmployee, employeeId);
+        if(employee == null){
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 }
